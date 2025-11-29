@@ -39,3 +39,14 @@ next-env.d.ts
 .wrangler
 .dev.vars
 
+# completion markers (don't push to show progress publicly)
+STEP*_COMPLETE.md
+
+# python virtual environment
+.venv/
+__pycache__/
+*.pyc
+
+
+# wrangler cache with account info
+cloudflare/node_modules/

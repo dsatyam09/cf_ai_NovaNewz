@@ -62,7 +62,10 @@ export default {
           returnMetadata: true,
         });
 
-        if (!vectorResults || vectorResults.length === 0) {
+        // Vectorize returns an object with matches array
+        const matches = vectorResults.matches || [];
+
+        if (matches.length === 0) {
           return new Response(
             JSON.stringify({
               query,
@@ -76,7 +79,7 @@ export default {
         }
 
         // 3. Retrieve full article details from D1
-        const articleIds = vectorResults
+        const articleIds = matches
           .map((result) => result.metadata?.article_id)
           .filter((id) => id !== undefined && id !== null);
 
@@ -104,7 +107,7 @@ export default {
         const articles = articlesResult.results || [];
 
         // 4. Combine vector results with article data, maintaining relevance order
-        const results = vectorResults
+        const results = matches
           .map((vectorResult) => {
             const articleId = vectorResult.metadata?.article_id;
             const article = articles.find((a) => a.id === articleId);

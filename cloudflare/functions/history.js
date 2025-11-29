@@ -62,7 +62,9 @@ export default {
           returnMetadata: true,
         });
 
-        if (!vectorResults || vectorResults.length === 0) {
+        const matches = vectorResults.matches || [];
+
+        if (matches.length === 0) {
           return new Response(
             JSON.stringify({
               summary: "No relevant articles found for this topic.",
@@ -76,7 +78,7 @@ export default {
         }
 
         // 3. Retrieve full article content from D1
-        const articleIds = vectorResults
+        const articleIds = matches
           .map((result) => result.metadata?.article_id)
           .filter((id) => id !== undefined && id !== null);
 

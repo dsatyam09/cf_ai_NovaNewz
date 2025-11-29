@@ -18,7 +18,9 @@ import argparse
 # Configuration
 API_BASE_URL = os.getenv("API_BASE_URL", "http://localhost:8787")  # Update with your Worker URL
 BATCH_SIZE = 50  # Process articles in batches
-DELAY_BETWEEN_REQUESTS = 0.1  # Seconds to wait between API calls
+DELAY_BETWEEN_REQUESTS = 0.5  # Seconds to wait between API calls (increased for rate limits)
+EMBEDDING_DELAY = 1.0  # Seconds to wait between embedding calls (slower to avoid rate limits)
+MAX_RETRIES = 3  # Maximum number of retries for failed requests
 
 # Hugging Face dataset URLs
 # Using the API endpoint for better reliability
@@ -178,7 +180,7 @@ def insert_article(article: Dict, api_url: str) -> Optional[Dict]:
 
 def generate_embedding(article_id: int, article: Dict, api_url: str) -> bool:
     """
-    Generate and store embedding for an article.
+    Generate and store embedding for an article with retry logic.
     
     Args:
         article_id: ID of the article
@@ -188,24 +190,40 @@ def generate_embedding(article_id: int, article: Dict, api_url: str) -> bool:
     Returns:
         True if successful, False otherwise
     """
-    try:
-        response = requests.post(
-            f"{api_url}/embed",
-            json={
-                "text": article["content"],
-                "article_id": article_id,
-                "title": article["title"],
-                "tags": article["tags"],
-                "published_at": article["published_at"],
-            },
-            headers={"Content-Type": "application/json"},
-            timeout=60
-        )
-        response.raise_for_status()
-        return True
-    except Exception as e:
-        print(f"    Error generating embedding for article {article_id}: {e}")
-        return False
+    for attempt in range(MAX_RETRIES):
+        try:
+            response = requests.post(
+                f"{api_url}/embed",
+                json={
+                    "text": article["content"],
+                    "article_id": article_id,
+                    "title": article["title"],
+                    "tags": article["tags"],
+                    "published_at": article["published_at"],
+                },
+                headers={"Content-Type": "application/json"},
+                timeout=60
+            )
+            response.raise_for_status()
+            return True
+        except requests.exceptions.HTTPError as e:
+            # Check if it's a rate limit error (429 or 500 from Workers AI)
+            if e.response.status_code in [429, 500]:
+                retry_delay = (2 ** attempt) * EMBEDDING_DELAY  # Exponential backoff
+                if attempt < MAX_RETRIES - 1:
+                    print(f"    Rate limit hit for article {article_id}, retrying in {retry_delay:.1f}s (attempt {attempt + 1}/{MAX_RETRIES})")
+                    time.sleep(retry_delay)
+                    continue
+                else:
+                    print(f"    Failed to generate embedding for article {article_id} after {MAX_RETRIES} attempts")
+                    return False
+            else:
+                print(f"    Error generating embedding for article {article_id}: {e}")
+                return False
+        except Exception as e:
+            print(f"    Error generating embedding for article {article_id}: {e}")
+            return False
+    return False
 
 
 def ingest_articles(df: pd.DataFrame, api_url: str, skip_embeddings: bool = False):
@@ -255,11 +273,11 @@ def ingest_articles(df: pd.DataFrame, api_url: str, skip_embeddings: bool = Fals
                 successful_embeddings += 1
             else:
                 failed_embeddings += 1
-            time.sleep(DELAY_BETWEEN_REQUESTS)
+            # Use longer delay for embeddings to avoid rate limits
+            time.sleep(EMBEDDING_DELAY)
         else:
             print(f"    Skipping embedding generation (article ID: {article_id})")
-        
-        time.sleep(DELAY_BETWEEN_REQUESTS)
+            time.sleep(DELAY_BETWEEN_REQUESTS)
     
     print(f"\n{'='*60}")
     print(f"Ingestion Summary:")
