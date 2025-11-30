@@ -69,29 +69,42 @@ export default function ReporterPage() {
 
   return (
     <main className="min-h-screen relative overflow-hidden">
-      {/* Animated Dark Background */}
+      {/* Background Image with Overlay */}
       <div className="fixed inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900"></div>
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: "url('/images/images.jpeg')",
+          }}
+        ></div>
+        
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900/95 via-slate-800/95 to-slate-900/95"></div>
+        
+        {/* Grid Pattern */}
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDI1NSwgMjU1LCAyNTUsIDAuMDUpIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-20"></div>
-        <div className="absolute top-20 left-10 w-72 h-72 bg-emerald-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
-        <div className="absolute top-40 right-10 w-72 h-72 bg-teal-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
-        <div className="absolute -bottom-8 left-40 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
+        
+        {/* Floating orbs */}
+        <div className="absolute top-20 left-10 w-72 h-72 bg-cyan-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+        <div className="absolute top-40 right-10 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+        <div className="absolute -bottom-8 left-40 w-72 h-72 bg-sky-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
       </div>
 
       <div className="relative z-10 p-4 sm:p-8">
         <div className="max-w-7xl mx-auto">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 sm:mb-8 animate-fade-in">
           <div className="flex items-center gap-3">
-            <div className="p-3 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl shadow-lg">
+            <div className="p-3 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-2xl shadow-lg">
               <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
               </svg>
             </div>
-            <h1 className="text-3xl sm:text-4xl font-black bg-gradient-to-r from-emerald-400 via-teal-400 to-blue-400 bg-clip-text text-transparent">Reporter Console</h1>
+            <h1 className="text-3xl sm:text-4xl font-black bg-gradient-to-r from-cyan-400 via-blue-400 to-sky-400 bg-clip-text text-transparent">Reporter Console</h1>
           </div>
           <Link
             href="/reporter/new"
-            className="px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-600 text-white rounded-2xl font-bold hover:from-emerald-600 hover:to-teal-700 transition-all shadow-lg hover:shadow-2xl hover:scale-105 w-full sm:w-auto text-center border border-white/20"
+            className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-2xl font-bold hover:from-cyan-600 hover:to-blue-700 transition-all shadow-lg hover:shadow-2xl hover:scale-105 w-full sm:w-auto text-center border border-white/20"
           >
             + Create New Article
           </Link>
@@ -116,7 +129,7 @@ export default function ReporterPage() {
         )}
 
         {successMessage && (
-          <div className="backdrop-blur-md bg-emerald-500/20 border border-emerald-500/50 text-emerald-200 px-4 py-3 rounded-2xl mb-6 shadow-lg">
+          <div className="backdrop-blur-md bg-cyan-500/20 border border-cyan-500/50 text-cyan-200 px-4 py-3 rounded-2xl mb-6 shadow-lg">
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <svg className="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
@@ -124,7 +137,7 @@ export default function ReporterPage() {
                 </svg>
                 <p className="font-medium">{successMessage}</p>
               </div>
-              <button onClick={() => setSuccessMessage(null)} className="text-emerald-200 hover:text-emerald-100 ml-4">
+              <button onClick={() => setSuccessMessage(null)} className="text-cyan-200 hover:text-cyan-100 ml-4">
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
                 </svg>
@@ -136,16 +149,16 @@ export default function ReporterPage() {
         {isLoading && (
           <div className="text-center py-16">
             <div className="relative inline-block">
-              <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 via-teal-500 to-blue-500 blur-2xl opacity-50 animate-pulse"></div>
-              <div className="relative inline-block animate-spin rounded-full h-16 w-16 border-4 border-white/20 border-t-emerald-400"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-sky-500 blur-2xl opacity-50 animate-pulse"></div>
+              <div className="relative inline-block animate-spin rounded-full h-16 w-16 border-4 border-white/20 border-t-cyan-400"></div>
             </div>
             <p className="mt-6 text-white/90 font-medium text-lg">Loading articles...</p>
           </div>
         )}
 
         {!isLoading && articles.length === 0 && (
-          <div className="backdrop-blur-md bg-white/10 border border-white/20 rounded-3xl p-8 sm:p-12 text-center shadow-2xl">
-            <div className="inline-block p-4 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl shadow-lg mb-6">
+          <div className="backdrop-blur-md bg-white/10 border border-cyan-400/20 rounded-3xl p-8 sm:p-12 text-center shadow-2xl">
+            <div className="inline-block p-4 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-2xl shadow-lg mb-6">
               <svg className="h-16 w-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
@@ -154,7 +167,7 @@ export default function ReporterPage() {
             <p className="text-white/60 text-sm sm:text-base mb-6">Create your first article to get started!</p>
             <Link
               href="/reporter/new"
-              className="inline-block px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-600 text-white rounded-2xl font-bold hover:from-emerald-600 hover:to-teal-700 transition-all shadow-lg hover:shadow-2xl hover:scale-105 border border-white/20"
+              className="inline-block px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-2xl font-bold hover:from-cyan-600 hover:to-blue-700 transition-all shadow-lg hover:shadow-2xl hover:scale-105 border border-white/20"
             >
               Create New Article
             </Link>
@@ -181,7 +194,7 @@ export default function ReporterPage() {
                       <td className="px-6 py-4">
                         <Link
                           href={`/articles/${article.id}`}
-                          className="text-blue-300 hover:text-blue-200 hover:underline font-medium"
+                          className="text-cyan-300 hover:text-cyan-200 hover:underline font-medium"
                         >
                           {article.title}
                         </Link>
@@ -245,7 +258,7 @@ export default function ReporterPage() {
                 <div key={article.id} className="p-4 backdrop-blur-sm hover:bg-white/5 transition-colors">
                   <Link
                     href={`/articles/${article.id}`}
-                    className="text-blue-300 hover:text-blue-200 font-medium text-base mb-2 block"
+                    className="text-cyan-300 hover:text-cyan-200 font-medium text-base mb-2 block"
                   >
                     {article.title}
                   </Link>

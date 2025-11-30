@@ -31,14 +31,14 @@ export default function SearchBar({ onSearch, isLoading = false }: SearchBarProp
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search: blockchain, AI, quantum computing..."
-            className="w-full pl-12 pr-4 py-4 rounded-2xl backdrop-blur-md bg-white/10 border-2 border-white/20 outline-none focus:border-blue-400 focus:bg-white/15 transition-all text-base text-white placeholder-white/50 shadow-lg hover:shadow-xl hover:bg-white/15"
+            className="w-full pl-12 pr-4 py-4 rounded-2xl backdrop-blur-md bg-white/10 border-2 border-white/20 outline-none focus:border-cyan-400 focus:bg-white/15 transition-all text-base text-white placeholder-white/50 shadow-lg hover:shadow-xl hover:bg-white/15"
             disabled={isLoading}
           />
         </div>
         <button
           type="submit"
           disabled={isLoading || !query.trim()}
-          className="px-8 py-4 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white rounded-2xl font-bold hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-2xl hover:scale-105 transform w-full sm:w-auto flex items-center justify-center gap-2 border border-white/20"
+          className="px-8 py-4 bg-gradient-to-r from-cyan-500 via-blue-500 to-sky-500 text-white rounded-2xl font-bold hover:from-cyan-600 hover:via-blue-600 hover:to-sky-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-2xl hover:scale-105 transform w-full sm:w-auto flex items-center justify-center gap-2 border border-white/20"
         >
           {isLoading ? (
             <span className="flex items-center justify-center gap-2">

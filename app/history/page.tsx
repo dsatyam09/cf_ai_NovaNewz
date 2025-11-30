@@ -37,15 +37,26 @@ export default function HistoryPage() {
 
   return (
     <main className="min-h-screen relative overflow-hidden">
-      {/* Animated Dark Background */}
+      {/* Background Image with Overlay */}
       <div className="fixed inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900"></div>
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: "url('/images/images.jpeg')",
+          }}
+        ></div>
+        
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900/95 via-slate-800/95 to-slate-900/95"></div>
+        
+        {/* Grid Pattern */}
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDI1NSwgMjU1LCAyNTUsIDAuMDUpIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-20"></div>
         
         {/* Floating orbs */}
-        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
-        <div className="absolute top-40 right-10 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
-        <div className="absolute -bottom-8 left-40 w-72 h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
+        <div className="absolute top-20 left-10 w-72 h-72 bg-cyan-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+        <div className="absolute top-40 right-10 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+        <div className="absolute -bottom-8 left-40 w-72 h-72 bg-sky-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
       </div>
 
       <div className="relative z-10 p-4 sm:p-8">
@@ -53,12 +64,12 @@ export default function HistoryPage() {
           {/* Header */}
           <div className="text-center mb-8 sm:mb-12 animate-fade-in">
             <div className="inline-flex items-center gap-3 mb-4">
-              <div className="p-3 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl shadow-lg">
+              <div className="p-3 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-2xl shadow-lg">
                 <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
               </div>
-              <h1 className="text-4xl sm:text-5xl font-black bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+              <h1 className="text-4xl sm:text-5xl font-black bg-gradient-to-r from-cyan-400 via-blue-400 to-sky-400 bg-clip-text text-transparent">
                 History Explorer
               </h1>
             </div>
@@ -121,16 +132,16 @@ export default function HistoryPage() {
               </div>
               <div className="relative">
                 {/* Timeline line */}
-                <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-400 via-purple-400 to-pink-400"></div>
+                <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-cyan-400 via-blue-400 to-sky-400"></div>
                 
                 <ul className="space-y-6">
                   {timeline.map((item, index) => (
                     <li key={index} className="relative pl-12 group">
                       {/* Timeline dot */}
-                      <div className="absolute left-2.5 top-1.5 w-4 h-4 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full border-2 border-white/20 shadow-lg group-hover:scale-125 transition-transform"></div>
+                      <div className="absolute left-2.5 top-1.5 w-4 h-4 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full border-2 border-white/20 shadow-lg group-hover:scale-125 transition-transform"></div>
                       
-                      <div className="backdrop-blur-sm bg-white/5 rounded-xl p-4 border border-white/10 hover:border-white/20 hover:bg-white/10 transition-all">
-                        <span className="font-bold text-blue-300 text-sm sm:text-base block mb-2">
+                      <div className="backdrop-blur-sm bg-white/5 rounded-xl p-4 border border-white/10 hover:border-cyan-400/20 hover:bg-white/10 transition-all">
+                        <span className="font-bold text-cyan-300 text-sm sm:text-base block mb-2">
                           📅 {item.date}
                         </span>
                         <span className="text-white/80 text-sm sm:text-base">{item.event}</span>
@@ -178,10 +189,10 @@ export default function HistoryPage() {
               {showSources && (
                 <ul className="space-y-4">
                   {sources.map((source, index) => (
-                    <li key={source.id} className="backdrop-blur-sm bg-white/5 rounded-2xl p-4 border border-white/10 hover:border-white/20 hover:bg-white/10 transition-all group animate-fade-in" style={{animationDelay: `${index * 50}ms`}}>
+                    <li key={source.id} className="backdrop-blur-sm bg-white/5 rounded-2xl p-4 border border-white/10 hover:border-cyan-400/20 hover:bg-white/10 transition-all group animate-fade-in" style={{animationDelay: `${index * 50}ms`}}>
                       <a
                         href={source.link || `/articles/${source.id}`}
-                        className="text-blue-300 hover:text-blue-200 font-semibold text-base sm:text-lg block mb-2 group-hover:underline"
+                        className="text-cyan-300 hover:text-cyan-200 font-semibold text-base sm:text-lg block mb-2 group-hover:underline"
                       >
                         {source.title}
                       </a>
@@ -210,9 +221,9 @@ export default function HistoryPage() {
           )}
 
           {!isLoading && !summary && !error && (
-            <div className="backdrop-blur-md bg-white/10 border border-white/20 rounded-3xl p-8 sm:p-12 text-center shadow-2xl animate-fade-in">
+            <div className="backdrop-blur-md bg-white/10 border border-cyan-400/20 rounded-3xl p-8 sm:p-12 text-center shadow-2xl animate-fade-in">
               <div className="mb-6">
-                <div className="inline-block p-4 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl shadow-lg">
+                <div className="inline-block p-4 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-2xl shadow-lg">
                   <svg className="h-16 w-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                   </svg>

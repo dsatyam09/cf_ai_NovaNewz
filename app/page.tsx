@@ -5,9 +5,20 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main className="min-h-screen relative overflow-hidden">
-      {/* Animated Dark Background */}
+      {/* Background Image with Overlay */}
       <div className="fixed inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"></div>
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: "url('/images/images.jpeg')",
+          }}
+        ></div>
+        
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900/95 via-slate-800/95 to-slate-900/95"></div>
+        
+        {/* Grid Pattern */}
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDI1NSwgMjU1LCAyNTUsIDAuMDUpIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-20"></div>
         
         {/* Floating orbs */}
@@ -18,27 +29,41 @@ export default function Home() {
 
       <div className="relative z-10 p-4 sm:p-8">
         <div className="max-w-6xl mx-auto">
-          {/* Hero Section */}
+          {/* Hero Section with Image Banner */}
           <div className="text-center mb-16 pt-12 animate-fade-in">
-            <div className="inline-block mb-8">
-              <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-sky-500 blur-3xl opacity-30 animate-pulse"></div>
-                <div className="relative flex items-center justify-center gap-4">
-                  {/* Newspaper Icon */}
-                  <svg className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 text-cyan-400" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M22 3H2C.9 3 0 3.9 0 5v14c0 1.1.9 2 2 2h20c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM2 19V5h8v14H2zm18 0h-8V5h8v14zM4 7h4v2H4V7zm0 4h4v2H4v-2zm0 4h4v2H4v-2zm12-8h4v6h-4V7zm0 8h4v2h-4v-2z"/>
-                  </svg>
-                  <h1 className="text-5xl sm:text-6xl md:text-7xl font-black bg-gradient-to-r from-cyan-400 via-blue-400 to-sky-400 bg-clip-text text-transparent drop-shadow-2xl">
-                    NovaNewz
-                  </h1>
+            {/* Image Banner with Text Overlay */}
+            <div className="relative w-full max-w-5xl mx-auto mb-8 rounded-3xl overflow-hidden shadow-2xl border-2 border-cyan-400/30">
+              <div 
+                className="relative h-64 sm:h-80 bg-cover bg-center"
+                style={{
+                  backgroundImage: "url('/images/images.jpeg')",
+                }}
+              >
+                {/* Gradient Overlay for Text Readability */}
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/60 to-slate-900/40"></div>
+                
+                {/* NovaNewz Title on Image */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center">
+                  <div className="relative">
+                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-sky-500 blur-3xl opacity-50 animate-pulse"></div>
+                    <div className="relative flex items-center justify-center gap-3 sm:gap-4 mb-4">
+                      {/* Newspaper Icon */}
+                      <svg className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 text-cyan-400 drop-shadow-2xl" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M22 3H2C.9 3 0 3.9 0 5v14c0 1.1.9 2 2 2h20c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM2 19V5h8v14H2zm18 0h-8V5h8v14zM4 7h4v2H4V7zm0 4h4v2H4v-2zm0 4h4v2H4v-2zm12-8h4v6h-4V7zm0 8h4v2h-4v-2z"/>
+                      </svg>
+                      <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black bg-gradient-to-r from-cyan-400 via-blue-400 to-sky-400 bg-clip-text text-transparent drop-shadow-2xl">
+                        NovaNewz
+                      </h1>
+                    </div>
+                    <p className="relative text-lg sm:text-xl md:text-2xl text-cyan-300 font-semibold drop-shadow-lg text-center">
+                      Your Intelligent Tech News Aggregator
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
             
-            <div className="max-w-3xl mx-auto mb-8 backdrop-blur-sm bg-white/5 rounded-2xl p-6 border border-white/10">
-              <p className="text-xl sm:text-2xl text-white/90 mb-3 font-bold">
-                Your Intelligent Tech News Aggregator
-              </p>
+            <div className="max-w-3xl mx-auto mb-8 backdrop-blur-md bg-white/5 rounded-2xl p-6 border border-cyan-400/20">
               <p className="text-sm sm:text-base text-white/70 leading-relaxed">
                 Stay ahead of the curve with instant access to 20,000+ curated technology articles. Search by topic, explore historical trends, and get AI-powered summaries tailored to your needs.
               </p>

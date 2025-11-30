@@ -54,3 +54,20 @@ Ingesting 20000 articles...
     Error generating embedding for article 2336: HTTPSConnectionPool(host='novanewz-api.novanewz-satyam.workers.dev', port=443): Read timed out. (read timeout=60)
   Progress: 1600/20000 articles processed
   Progress: 1700/20000 articles processed
+  Progress: 1800/20000 articles processed
+    Error inserting article 'Pakistan Internet Restrictions Could be ‘Indefinite’': HTTPSConnectionPool(host='novanewz-api.novanewz-satyam.workers.dev', port=443): Read timed out. (read timeout=30)
+  Progress: 1900/20000 articles processed
+  Progress: 2000/20000 articles processed
+  Progress: 2100/20000 articles processed
+    Error inserting article 'Instagram influencer stalked and harassed Premier League stars after breaking-up with Mason Mount': HTTPSConnectionPool(host='novanewz-api.novanewz-satyam.workers.dev', port=443): Read timed out. (read timeout=30)
+  Progress: 2200/20000 articles processed
+  Progress: 2300/20000 articles processed
+  Progress: 2400/20000 articles processed
+  Progress: 2500/20000 articles processed
+  Progress: 2600/20000 articles processed
+  Skipping row 2670: Invalid article data
+  Progress: 2700/20000 articles processed
+  Progress: 2800/20000 articles processed
+  Skipping row 2877: Invalid article data
+  Progress: 2900/20000 articles processed
+  Progress: 3000/20000 articles processed
