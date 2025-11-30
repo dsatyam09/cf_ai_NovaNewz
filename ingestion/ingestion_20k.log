@@ -48,3 +48,9 @@ Ingesting 20000 articles...
   Progress: 1100/20000 articles processed
   Progress: 1200/20000 articles processed
   Skipping row 1209: Invalid article data
+  Progress: 1300/20000 articles processed
+  Progress: 1400/20000 articles processed
+  Progress: 1500/20000 articles processed
+    Error generating embedding for article 2336: HTTPSConnectionPool(host='novanewz-api.novanewz-satyam.workers.dev', port=443): Read timed out. (read timeout=60)
+  Progress: 1600/20000 articles processed
+  Progress: 1700/20000 articles processed
