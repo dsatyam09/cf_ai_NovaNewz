@@ -57,15 +57,22 @@ export default {
 
         // 2. Query Vectorize for similar articles
         const vectorResults = await env.VECTORIZE.query(queryEmbedding, {
-          topK: Math.min(topK, 20), // Limit to 20 max
+          topK: Math.min(topK * 2, 40), // Get more candidates for filtering
           returnValues: false,
           returnMetadata: true,
         });
 
         // Vectorize returns an object with matches array
         const matches = vectorResults.matches || [];
+        
+        // Filter by relevance score - only return articles with similarity > 0.6
+        const relevantMatches = matches
+          .filter(match => match.score > 0.6)
+          .slice(0, topK); // Limit to requested topK after filtering
+        
+        console.log(`Search: ${matches.length} total, ${relevantMatches.length} relevant (score > 0.6)`);
 
-        if (matches.length === 0) {
+        if (relevantMatches.length === 0) {
           return new Response(
             JSON.stringify({
               query,
@@ -78,8 +85,8 @@ export default {
           );
         }
 
-        // 3. Retrieve full article details from D1
-        const articleIds = matches
+        // 3. Retrieve full article details from D1 (using filtered matches)
+        const articleIds = relevantMatches
           .map((result) => result.metadata?.article_id)
           .filter((id) => id !== undefined && id !== null);
 
@@ -107,7 +114,7 @@ export default {
         const articles = articlesResult.results || [];
 
         // 4. Combine vector results with article data, maintaining relevance order
-        const results = matches
+        const results = relevantMatches
           .map((vectorResult) => {
             const articleId = vectorResult.metadata?.article_id;
             const article = articles.find((a) => a.id === articleId);

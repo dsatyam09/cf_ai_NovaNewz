@@ -55,16 +55,21 @@ export default {
 
         const queryEmbedding = embeddingResponse.data[0];
 
-        // 2. Query Vectorize to find relevant articles (get top 8-10 for timeline)
+        // 2. Query Vectorize to find relevant articles (get top 20, then filter by relevance)
         const vectorResults = await env.VECTORIZE.query(queryEmbedding, {
-          topK: 10,
+          topK: 20,
           returnValues: false,
           returnMetadata: true,
         });
 
         const matches = vectorResults.matches || [];
+        
+        // Filter by relevance score - only keep articles with similarity > 0.6
+        const relevantMatches = matches.filter(match => match.score > 0.6);
+        
+        console.log(`Found ${matches.length} total matches, ${relevantMatches.length} above threshold (score > 0.6)`);
 
-        if (matches.length === 0) {
+        if (relevantMatches.length === 0) {
           return new Response(
             JSON.stringify({
               summary: "No relevant articles found for this topic.",
@@ -78,9 +83,15 @@ export default {
         }
 
         // 3. Retrieve full article content from D1
-        const articleIds = matches
+        // Use filtered matches and sort by relevance score
+        const articleIds = relevantMatches
+          .sort((a, b) => b.score - a.score)
+          .slice(0, 10) // Take top 10 most relevant
           .map((result) => result.metadata?.article_id)
           .filter((id) => id !== undefined && id !== null);
+        
+        // Store scores for later use
+        const scoreMap = new Map(relevantMatches.map(m => [m.metadata?.article_id, m.score]));
 
         if (articleIds.length === 0) {
           return new Response(
@@ -133,12 +144,20 @@ export default {
         // - @cf/meta/llama-3-8b-instruct
         // - @cf/meta/llama-3.1-8b-instruct
         // - @cf/meta/llama-3.3-8b-instruct
-        const summaryPrompt = `You are a tech news historian. Based on the following articles about "${query}", write a concise historical summary (3-6 sentences) that explains the key developments and context. Only use information from the provided articles - do not make up facts.
+        const summaryPrompt = `You are a tech news historian analyzing articles about "${query}". 
+
+These articles have been selected based on relevance (similarity scores shown). Focus on the most relevant articles (higher %).
 
 Articles:
 ${articlesText}
 
-Write a concise historical summary:`;
+Task: Write a focused 4-6 sentence summary that:
+1. Identifies the main theme connecting these articles to "${query}"
+2. Highlights key developments, companies, or events
+3. Provides context about why these stories matter
+4. Only uses facts from the articles above - no speculation
+
+Historical Summary:`;
 
         let summary = "";
         try {
