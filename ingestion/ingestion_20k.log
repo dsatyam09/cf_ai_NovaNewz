@@ -1,0 +1,50 @@
+============================================================
+NovaNewz Data Ingestion Script
+============================================================
+API URL: https://novanewz-api.novanewz-satyam.workers.dev
+Samples: 20000
+Skip embeddings: False
+============================================================
+Downloading dataset from Hugging Face...
+  Downloading file 1/2: https://huggingface.co/api/datasets/AIatMongoDB/tech-news-embeddings/parquet/default/train/0000.parquet
+    Loaded 37913 rows
+  Downloading file 2/2: https://huggingface.co/api/datasets/AIatMongoDB/tech-news-embeddings/parquet/default/train/0001.parquet
+    Loaded 37931 rows
+
+Combining 2 dataframes...
+Total rows: 75844
+Sampling 20000 rows...
+
+Dataset shape: (20000, 9)
+Columns: ['_id', 'companyName', 'companyUrl', 'published_at', 'url', 'title', 'main_image', 'description', 'embedding']
+
+First few rows:
+                        _id  ...                                          embedding
+0  65c6872cf187c085a8678539  ...  [-0.0692225769162178, 0.030411487445235252, 0....
+1  65c7fbaa73139492d6ef0f6d  ...  [0.09581605345010757, 0.05163145065307617, 0.1...
+2  65c63fa2f187c085a866f90c  ...  [-0.055775079876184464, -0.027697019279003143,...
+3  65c7fcc873139492d6ef12de  ...  [-0.06529560685157776, 0.06052878126502037, 0....
+4  65c7f63373139492d6ef00c6  ...  [0.003853039350360632, -0.022790661081671715, ...
+
+[5 rows x 9 columns]
+
+Ingesting 20000 articles...
+  Progress: 100/20000 articles processed
+  Progress: 200/20000 articles processed
+    Error generating embedding for article 1030: HTTPSConnectionPool(host='novanewz-api.novanewz-satyam.workers.dev', port=443): Read timed out. (read timeout=60)
+    Error inserting article 'Plant-based air purifiers are coming to your home — The Blueprint': HTTPSConnectionPool(host='novanewz-api.novanewz-satyam.workers.dev', port=443): Read timed out. (read timeout=30)
+  Progress: 300/20000 articles processed
+    Error inserting article 'Opinion: Local phone calls go retro with 10-digit dialing': HTTPSConnectionPool(host='novanewz-api.novanewz-satyam.workers.dev', port=443): Read timed out. (read timeout=30)
+  Progress: 400/20000 articles processed
+  Skipping row 417: Invalid article data
+  Progress: 500/20000 articles processed
+  Skipping row 581: Invalid article data
+  Progress: 600/20000 articles processed
+  Progress: 700/20000 articles processed
+  Progress: 800/20000 articles processed
+    Error inserting article 'BMW won't use Google apps when it transitions to Android Automotive next year': HTTPSConnectionPool(host='novanewz-api.novanewz-satyam.workers.dev', port=443): Read timed out. (read timeout=30)
+  Progress: 900/20000 articles processed
+  Progress: 1000/20000 articles processed
+  Progress: 1100/20000 articles processed
+  Progress: 1200/20000 articles processed
+  Skipping row 1209: Invalid article data
