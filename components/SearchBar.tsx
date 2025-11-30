@@ -18,11 +18,11 @@ export default function SearchBar({ onSearch, isLoading = false }: SearchBarProp
   };
 
   return (
-    <form onSubmit={handleSubmit} className="w-full max-w-2xl mx-auto">
-      <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+    <form onSubmit={handleSubmit} className="w-full max-w-3xl mx-auto">
+      <div className="flex flex-col sm:flex-row gap-3">
         <div className="relative flex-1">
           <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-            <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="h-5 w-5 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
           </div>
@@ -31,14 +31,14 @@ export default function SearchBar({ onSearch, isLoading = false }: SearchBarProp
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search: blockchain, AI, quantum computing..."
-            className="w-full pl-12 pr-4 py-3 rounded-xl bg-white border-2 border-gray-200 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all text-base shadow-sm hover:shadow-md"
+            className="w-full pl-12 pr-4 py-4 rounded-2xl backdrop-blur-md bg-white/10 border-2 border-white/20 outline-none focus:border-blue-400 focus:bg-white/15 transition-all text-base text-white placeholder-white/50 shadow-lg hover:shadow-xl hover:bg-white/15"
             disabled={isLoading}
           />
         </div>
         <button
           type="submit"
           disabled={isLoading || !query.trim()}
-          className="px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl hover:scale-105 transform w-full sm:w-auto flex items-center justify-center gap-2"
+          className="px-8 py-4 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white rounded-2xl font-bold hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-2xl hover:scale-105 transform w-full sm:w-auto flex items-center justify-center gap-2 border border-white/20"
         >
           {isLoading ? (
             <span className="flex items-center justify-center gap-2">
@@ -53,7 +53,7 @@ export default function SearchBar({ onSearch, isLoading = false }: SearchBarProp
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
-              Generate History
+              Generate
             </>
           )}
         </button>
