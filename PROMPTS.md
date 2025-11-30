@@ -270,29 +270,6 @@ Features: Instant Search, Smart Summaries, Historical Analysis
 </div>
 ```
 
----
-
-## Build & Deployment
-
-### Prompt 15: Fix Build Error
-**User Prompt:**
-> "Fix: client-only cannot be imported from Server Component"
-
-**AI Assistance:**
-- Identified styled-jsx causing SSR issue
-- Added `"use client"` directive to `app/page.tsx`
-- Explained Next.js 13+ client/server component distinction
-- Verified build succeeds after fix
-- Tested in development mode
-
-**Solution:**
-```tsx
-'use client'
-
-export default function Home() {
-  // Component code with styled-jsx
-}
-```
 
 ---
 
