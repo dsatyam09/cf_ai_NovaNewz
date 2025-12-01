@@ -71,3 +71,25 @@ Ingesting 20000 articles...
   Skipping row 2877: Invalid article data
   Progress: 2900/20000 articles processed
   Progress: 3000/20000 articles processed
+  Progress: 3100/20000 articles processed
+  Skipping row 3158: Invalid article data
+  Progress: 3200/20000 articles processed
+  Progress: 3300/20000 articles processed
+  Progress: 3400/20000 articles processed
+  Progress: 3500/20000 articles processed
+  Progress: 3600/20000 articles processed
+    Error generating embedding for article 4463: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+  Progress: 3700/20000 articles processed
+  Progress: 3800/20000 articles processed
+  Progress: 3900/20000 articles processed
+  Progress: 4000/20000 articles processed
+  Progress: 4100/20000 articles processed
+  Progress: 4200/20000 articles processed
+  Progress: 4300/20000 articles processed
+    Error inserting article 'Stinky shoes? These $10 air purifying bags are an easy solution for unpleasant odors': ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+  Progress: 4400/20000 articles processed
+  Progress: 4500/20000 articles processed
+  Progress: 4600/20000 articles processed
+  Progress: 4700/20000 articles processed
+  Progress: 4800/20000 articles processed
+  Progress: 4900/20000 articles processed

@@ -197,9 +197,9 @@ def main():
     print(f"Batch size: {args.batch_size}")
     print(f"Delay: {args.delay}s")
     print("="*60)
-    print("\nThis will take a while. You can stop with Ctrl+C and resume later.")
-    print("Press Enter to continue...")
-    input()
+    print("\nStarting embedding process...")
+    print("This will take a while. Check embedding_progress.json for updates.")
+    print("="*60)
     
     try:
         success, failed = embed_all_articles(
