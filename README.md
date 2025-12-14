@@ -2,7 +2,6 @@
 
 A modern tech news aggregation platform with AI-powered search and history generation, built with Cloudflare's AI stack.
 
-> **Note:** This project was developed with AI assistance. See [PROMPTS.md](PROMPTS.md) for all AI prompts used during development.
 
 ## 🚀 Try It Out
 
