@@ -340,5 +340,3 @@ See [PROMPTS.md](PROMPTS.md) for complete prompt history and code examples.
 
 Built with ❤️ using Next.js and Cloudflare's AI Stack
 
-**Repository:** [github.com/yourusername/cf_ai_NovaNewz](https://github.com/yourusername/cf_ai_NovaNewz)  
-**License:** MIT
